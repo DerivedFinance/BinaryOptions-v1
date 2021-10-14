@@ -1,0 +1,94 @@
+.addoption {
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 10px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8), -4px -4px 6px #494949;
+  font-size: 18px;
+  width: 400px;
+  padding-top: 0.8rem;
+}
+.input_filed {
+  display: block;
+  margin: 0.8rem;
+  padding: 0.1rem;
+}
+.text {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  color: white;
+  padding-left: 6px;
+  border-radius: 10px;
+  height: 40px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8), -2px -2px 3px #494949;
+}
+.input_title {
+  width: 150px;
+  text-align: left;
+  padding-left: 10px;
+}
+.Add_Option_Button {
+  text-align: center;
+  transition: all 0.2s;
+  border-radius: 15px;
+  border: none;
+  background: #0a1b25;
+  color: #86c440;
+  font-size: 16px;
+  padding: 5px 20px;
+  margin: 1rem;
+  width: 50%;
+  text-decoration: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), -2px -2px 4px #494949;
+}
+.Add_Option_Button:hover {
+  background-color: #86c440;
+  color: #17141a;
+}
+.input_text_option {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+}
+@media (max-width: 600px) {
+  .addoption {
+    width: 90vw;
+  }
+  .text {
+    width: 100% !important;
+  }
+  .input_filed {
+    display: block;
+  }
+}
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+.addoptionerror {
+  color: rgba(255, 0, 0, 0.9);
+  text-align: left;
+  margin-left: 10px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.currency-option {
+  width: 100%;
+  height: 40px;
+  color: white;
+  padding: 0px 10px;
+  border-radius: 6px;
+  background-color: transparent;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8), -4px -4px 6px #494949;
+  border-color: transparent;
+}
+option{
+  background-color: #0a1b25;
+}
+option:active{
+  background-color: #86c440 ;
+}

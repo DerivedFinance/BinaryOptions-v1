@@ -1,0 +1,74 @@
+.Sidebar_list::-webkit-scrollbar {
+  width: 3px;
+}
+.Sidebar::-webkit-scrollbar {
+  display: none;
+}
+.Sidebar_list::-webkit-scrollbar-thumb {
+  background: #86c440;
+}
+.Sidebar {
+  z-index: 10;
+  direction: rtl;
+  height: 100vh;
+  top: 0;
+  overflow: auto;
+  position: fixed;
+}
+.sidecard{
+  display: flex;
+  direction: ltr;
+}
+.Sidebar_list {
+  max-height: 60vh;
+  overflow: auto;
+  padding-left: 8px;
+  margin-top: 25vh;
+}
+.expired_image {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  justify-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8), -4px -4px 6px #494949;
+}
+.expired_list {
+  margin-top: 1rem;
+  direction: ltr;
+  cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+  .Sidebar {
+    display: none;
+  }
+}
+.tooltip_hover {
+  color: white;
+  margin: auto 10px;
+  display: none;
+  text-align: left;
+  width: auto;
+  padding: 5px 10px;
+  position: relative;
+  background: #0a1b25;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8), -2px -2px 3px #494949;
+  text-transform: uppercase;
+
+}
+.expired_list:hover ~ .tooltip_hover {
+  color: white;
+  display: block;
+}
+.expired_header {
+  font-size: 20px;
+  color: white;
+}
+.expired_currency{
+  color:white;
+  text-transform: uppercase;
+  text-align: center;
+}

@@ -1,0 +1,72 @@
+:root {
+  --border-radius: 1rem;
+}
+.nav-layout {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-between !important;
+}
+
+.navbar-nav {
+  align-items: flex-end;
+}
+
+.navLogo {
+  width: 222px;
+  border-radius: var(--border-radius);
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.8),
+  -2px -2px 3px #494949;
+}
+
+.loginCard {
+  width: auto !important;
+}
+
+.dashboardWrapper {
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.text-content {
+  margin-top: 10vh;
+}
+.dvd-nav {
+  max-width: 120px;
+  margin-right: 10px;
+}
+
+.eth-nav {
+  min-width: 160px;
+  max-width: 160px;
+  margin-right: 10px;
+}
+
+@media (max-width:991px){
+  .dvd-nav {
+    margin-bottom: 10px;
+  }
+  
+  .eth-nav {
+    margin-bottom: 10px;
+  } 
+}
+@media only screen and (max-width: 600px) {
+  .nav-layout{
+    align-items: flex-end !important;
+  }
+  .navbar-nav {
+    align-items: flex-end;
+  }
+  .navLogo {
+    width: 50vw;
+  }
+
+  .loginCard p {
+    display: none;
+  }
+}

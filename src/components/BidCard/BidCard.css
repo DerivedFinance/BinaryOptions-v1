@@ -1,0 +1,155 @@
+.button-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  width: 16px;
+  height: 16px;
+}
+.Bidcard{
+  width: 400px !important;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow:  4px 4px 6px rgba(0,0,0,0.8),
+    -4px -4px 6px #494949;
+}
+.onpause_error_text{
+  font-size: 15px;
+  margin-top: 6px;
+}
+@media (max-width:760px) {
+  .Bidcard {
+    width: 320px !important;
+  }
+  .onpause_error_text{
+    font-size: 10px;
+    margin-top: 3px;
+  }
+}
+.bid-ended {
+  display: flex;
+  font-size: medium !important;
+  justify-content: center !important;
+  color: rgb(200, 39, 39) !important;
+  font-weight: 700;
+  pointer-events: none;
+}
+.bid-claim {
+  justify-content: center !important;
+}
+
+.long_sort_button{
+  width: 48%;
+}
+
+.short_color {
+  color: salmon !important;
+}
+
+.short_color:hover, .short_color:active {
+  background-color: salmon !important;
+  color: #17141a !important;
+}
+
+.Card_action {
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+.Card_component {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+.Bid_Card_main {
+  display: flex;
+  padding: 10px 25px;
+  flex-direction: column;
+  height: 100%;
+}
+.BidTokenPair_images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Button_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+  border-radius: 15px;
+  border: none;
+  background: #0a1b25;
+  color: #86c440;
+  font-size: 16px;
+  padding: 5px 20px;
+  margin-top: 10px;
+  text-decoration: none;
+  box-shadow:  2px 2px 4px rgba(0,0,0,0.8),
+    -2px -2px 4px #494949;
+}
+.Button_button:hover{
+  background-color: #86c440;
+  color: #17141a;
+  text-align: center;
+}
+.Card_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.Card_title {
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
+.Card_content {
+  color: #dfdfdf;
+}
+.Card_heading {
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  height: 24px;
+  text-transform: uppercase;
+}
+.Bidfooter-title {
+  display: flex;
+  justify-content: space-between;
+}
+input[type=number].form-check-input {
+  background: transparent;
+  border: none;
+  padding-left: 6px;
+  color: white;
+  outline: none;
+  height: 32px;
+  text-align: center;
+}
+.input_text{
+  border-radius: 7px;
+  border: 2px solid gray;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.form-check{
+  width: 100%;
+}
+.inc{
+  padding-right: 10px;
+}
+.dec{
+  padding-left: 10px;
+}
+.DVD_Balance_error_text{
+  color: tomato;
+  margin-top: 10px;
+  text-align: left;
+  font-size: 18px;
+}

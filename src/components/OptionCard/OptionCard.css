@@ -1,0 +1,144 @@
+:root {
+  --card-font-size: 1rem;
+  --card-img-margin: 1rem;
+  --card-text-margin: 2rem;
+}
+
+.card-main-wrapper {
+  max-width: 100%;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(235, 131, 130, 1) 0%,
+    rgba(235, 131, 130, 0.75) 38.6%,
+    rgba(211, 177, 125, 0.52) 72.1%,
+    rgba(211, 177, 125, 0.24) 94.7%
+  );
+  color: black;
+  margin-top: 2rem;
+  height: 50vh;
+}
+
+.card-body {
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.card-title-wrapper {
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--card-font-size);
+  padding: 0px 10px;
+}
+
+.card-title-wrapper .crypto-image img {
+  min-width: 15% !important;
+  overflow: hidden;
+}
+
+.crypto-image {
+  width: 15% !important;
+  min-width: 25% !important;
+  margin-right: var(--card-img-margin);
+  background-image: url("../../assets/images/crypto-fallback.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-color: transparent;
+  outline-color: transparent;
+  background-color: white;
+  background-origin: content-box;
+}
+
+.card-title-wrapper p {
+  margin-bottom: 0px;
+  margin-right: var(--card-text-margin);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-font {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  background-image: linear-gradient(
+    92.7deg,
+    rgba(245, 212, 212, 1) 8.5%,
+    rgba(252, 251, 224, 1) 90.2%
+  ) !important;
+}
+.card-footer-wrapper {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  background: linear-gradient(
+    92.7deg,
+    rgba(245, 212, 212, 1) 8.5%,
+    rgba(252, 251, 224, 1) 90.2%
+  ) !important;
+}
+
+.card-center {
+  padding: 10px;
+  font-size: var(--card-font-size);
+  font-weight: 600;
+}
+
+.card-center p {
+  margin-bottom: 2px;
+}
+
+.card-main-wrapper:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1200px) {
+  .card-title-wrapper {
+    display: inline-block !important;
+    font-size: 1.5rem;
+  }
+  .d-flex {
+    justify-content: center;
+  }
+  .card-center p {
+    font-size: 1.5rem;
+  }
+  .time-font {
+    font-size: 1.5rem;
+    margin-left: -10px;
+    margin-top: 1rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .card-title-wrapper {
+    display: inline-block !important;
+    font-size: 1rem;
+  }
+  .d-flex {
+    justify-content: center;
+  }
+  .card-center p {
+    font-size: 1rem;
+  }
+  .time-font {
+    font-size: 1rem;
+    margin-left: -5rem;
+    margin-top: 1rem;
+    width: 11rem;
+  }
+  .crypto-image{
+    min-width: 15% !important;
+  }
+  .card-title-header{
+    margin-left: -4rem;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .main-wrapper {
+    height: calc(100% - 60%) !important;
+  }
+}
