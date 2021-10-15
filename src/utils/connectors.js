@@ -2,7 +2,7 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 
 // Add different connectors
 export const injected = new InjectedConnector({
-  supportedChainIds: [1, 4], // Change according to supported Network Ids
+  supportedChainIds: [1, 4, 56, 97], // Change according to supported Network Ids
 });
 
 export const SUPPORTED_CHAINS = {
@@ -11,5 +11,7 @@ export const SUPPORTED_CHAINS = {
   4: "RINKEBY",
   5: "GOERLI",
   42: "KOVAN",
+  56: "BSC-MAINNET",
+  97: "BSC-TESTNET",
   1337: "GANACHE",
 };
