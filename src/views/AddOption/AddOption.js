@@ -181,6 +181,8 @@ const AddOption = () => {
                 const client = new create("https://ipfs.infura.io:5001/api/v0");
                 const added = await client.add(event.target.files[0]);
                 const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+                console.log("added:" + added);
+                console.log(url);
                 if (url)
                   setForm({
                     ...form,
