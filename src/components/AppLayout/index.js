@@ -13,15 +13,14 @@ import "./AppLayout.css";
 import Sidebar from "../Sidebar/Sidebar";
 
 const NavWithDetails = ({ title, value, ...props }) => {
-  const mediaQuery = window.matchMedia( "(max-width: 900px)" );
+  const mediaQuery = window.matchMedia("(max-width: 900px)");
 
   const renderTooltip = (props) => (
-        <Tooltip id="button-tooltip" {...props}>
-          {value}
-        </Tooltip>
-      );
+    <Tooltip id="button-tooltip" {...props}>
+      {value}
+    </Tooltip>
+  );
   return (
-    
     <div className="user-info dvd-nav" {...props}>
       <div className="user-info-wrapper">
         <div className="user-address-wrapper">
@@ -37,7 +36,11 @@ const NavWithDetails = ({ title, value, ...props }) => {
                   {value.length > 5 ? truncateBalance(value.toString()) : value}
                 </div>
               </OverlayTrigger>
-            ):<div>{value.length > 5 ? truncateBalance(value.toString()) : value}</div>}
+            ) : (
+              <div>
+                {value.length > 5 ? truncateBalance(value.toString()) : value}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -64,12 +67,24 @@ const AppLayout = ({ children }) => {
 
           <Nav>
             {account ? (
-              <Fragment>      
-                <NavWithDetails title="ETH" value={ether} className="eth-nav" />{" "}
-                <NavWithDetails title="USDx" value={DVDBalance.toString()} className="eth-nav"/>
+              <Fragment>
+                <NavWithDetails title="BNB" value={ether} className="eth-nav" />{" "}
+                <NavWithDetails
+                  title="USDx"
+                  value={DVDBalance.toString()}
+                  className="eth-nav"
+                />
               </Fragment>
             ) : null}
-            {account ? <UserInfo address={account} ether={ether} DVDBalance={DVDBalance}/> : <MetamaskButton />}
+            {account ? (
+              <UserInfo
+                address={account}
+                ether={ether}
+                DVDBalance={DVDBalance}
+              />
+            ) : (
+              <MetamaskButton />
+            )}
           </Nav>
         </Navbar>
         <Sidebar />

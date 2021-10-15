@@ -64,7 +64,7 @@ const App = () => {
             <div className="mb-2">
               <div className="row mt-4 text-center ml-auto mr-auto wrong-network">
                 {error instanceof UnsupportedChainIdError ? (
-                  <h5>Please connect to the appropriate Ethereum network.</h5>
+                  <h5>Please connect to the appropriate ERC20 network.</h5>
                 ) : (
                   <h5>Error connecting. Try refreshing the page.</h5>
                 )}

@@ -3,7 +3,7 @@ import React from "react";
 import "./banner.css";
 
 const Banner = () => {
-  const {account} = useWeb3React();
+  const { account } = useWeb3React();
   return (
     <div className="component">
       <section className="main">
@@ -12,9 +12,11 @@ const Banner = () => {
           <section className="encourage">
             Trade cryptocurrencies options (long and short).
           </section>
-          {!account && <section className="encourage">
-            Please connect to the appropriate Ethereum network for Data.
-          </section>}
+          {!account && (
+            <section className="encourage">
+              Please connect to the appropriate ERC20 network for Data.
+            </section>
+          )}
         </header>
       </section>
     </div>
