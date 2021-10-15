@@ -15,6 +15,7 @@ import {
 
 import optionSC from "./../../contracts/option.json";
 import "./AddOption.css";
+import { BorderAll } from "@material-ui/icons";
 
 // Deploy contract
 const deploy = async (endtime, strikePrice, currency) => {
@@ -27,6 +28,71 @@ const deploy = async (endtime, strikePrice, currency) => {
     const web3 = new Web3(ethereum);
     const accounts = await web3.eth.getAccounts();
 
+    // Variable to store the aggregator address
+    var aggregator ;
+
+    // Check for the corresponding currecny symbol and assign the aggregator address
+    switch(currency) {
+
+      case "AAVE":
+        aggregator = "0x298619601ebCd58d0b526963Deb2365B485Edc74";
+        break;
+
+      case "ADA":
+        aggregator = "0x5e66a1775BbC249b5D51C13d29245522582E671C";
+        break;
+
+      case "BNB":
+        aggregator = "0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526";
+        break;
+  
+      case "BTC":
+        aggregator = "0x5741306c21795FdCBb9b265Ea0255F499DFe515C";
+        break;
+
+      case "CAKE":
+        aggregator = "0x81faeDDfeBc2F8Ac524327d70Cf913001732224C";
+        break;
+     
+      case "DODO":
+        aggregator = "0x2939E0089e61C5c9493C2013139885444c73a398";
+        break;
+      
+      case "DOGE":
+        aggregator = "0x963D5e7f285Cc84ed566C486c3c1bC911291be38";
+        break;
+      
+      case "DOT":
+        aggregator = "0xEA8731FD0685DB8AeAde9EcAE90C4fdf1d8164ed";
+        break;
+  
+      case "ETH":
+        aggregator = "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7";
+        break;
+         
+      case "FIL":
+        aggregator = "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7";
+        break;
+
+      case "LINK":
+        aggregator = "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7";
+        break;
+
+      case "MATIC":
+        aggregator = "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7";
+        break;
+      
+      case "REEF":
+        aggregator = "0x902fA2495a8c5E89F7496F91678b8CBb53226D06";
+        break;
+
+      case "XRP":
+        aggregator = "0x4046332373C24Aed1dC8bAd489A04E187833B28d";
+        break;
+      
+
+    }
+    
     const result = await new web3.eth.Contract(abi)
       .deploy({
         data: bytecode,
@@ -35,7 +101,7 @@ const deploy = async (endtime, strikePrice, currency) => {
           endtime,
           strikePrice,
           endtime,
-          process.env.REACT_APP_AGGREGATOR,
+          aggregator, 
           currency,
         ],
       })

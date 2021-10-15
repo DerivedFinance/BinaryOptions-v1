@@ -15,12 +15,20 @@ const DEPLOY_SUCCESS = "Options deployed Successfully";
 const DEPLOY_FAILED = "Option deployment failed";
 
 const OPTIONS = [
-  { label: "BTC", value: "BTC" },
-  { label: "ETH", value: "ETH" },
-  { label: "BNB", value: "BNB" },
-  { label: "SOL", value: "SOL" },
+  { label: "AAVE", value: "AAVE" },
   { label: "ADA", value: "ADA" },
-  { label: "SUSHI", value: "SUSHI" },
+  { label: "BNB", value: "BNB" },
+  { label: "BTC", value: "BTC" },
+  { label: "CAKE", value: "CAKE" },
+  { label: "DODO", value: "DODO" },
+  { label: "DOGE", value: "DOGE" },
+  { label: "DOT", value: "DOT" },
+  { label: "ETH", value: "ETH" },
+  { label: "FIL", value: "FIL" },
+  { label: "LINK", value: "LINK" },
+  { label: "MATIC", value: "MATIC" },
+  { label: "REEF", value: "REEF" },
+  { label: "XRP", value: "XRP" },
 ];
 
 export {
