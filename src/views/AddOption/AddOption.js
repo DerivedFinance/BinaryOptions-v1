@@ -6,12 +6,7 @@ import { create } from "ipfs-http-client";
 import { pinOptionData } from "./../../utils/storeData";
 import Spinner from "../../components/Spinner/Spinner";
 import toasterMessage from "../../utils/toasterMessage";
-import {
-  DEPLOY_FAILED,
-  DEPLOY_SUCCESS,
-  DEPLOY_PINATA_FAILED,
-  OPTIONS,
-} from "../../constants";
+import { DEPLOY_FAILED, DEPLOY_SUCCESS, DEPLOY_PINATA_FAILED, OPTIONS } from "../../constants";
 
 import optionSC from "./../../contracts/option.json";
 import "./AddOption.css";
@@ -93,14 +88,7 @@ const deploy = async (endtime, strikePrice, currency) => {
     const result = await new web3.eth.Contract(abi)
       .deploy({
         data: bytecode,
-        arguments: [
-          process.env.REACT_APP_USDXTOKEN,
-          endtime,
-          strikePrice,
-          endtime,
-          aggregator,
-          currency,
-        ],
+        arguments: [process.env.REACT_APP_USDXTOKEN, endtime, strikePrice, endtime - 86400 * 3, aggregator, currency],
       })
       .send({ gas: web3.utils.toHex(10000000), from: accounts[0] });
     return result.options.address;
@@ -123,41 +111,21 @@ const AddOption = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (account && account !== process.env.REACT_APP_ADMIN_WALLET)
-      history.push("/");
+    if (account && account !== process.env.REACT_APP_ADMIN_WALLET) history.push("/");
   });
 
   const getTwoDigit = (value) => (value > 9 ? value : "0" + value);
 
   const date = new Date();
 
-  const minDate =
-    date.getFullYear() +
-    "-" +
-    getTwoDigit(date.getMonth() + 1) +
-    "-" +
-    getTwoDigit(date.getDate()) +
-    "T" +
-    getTwoDigit(date.getHours()) +
-    ":" +
-    getTwoDigit(date.getMinutes());
+  const minDate = date.getFullYear() + "-" + getTwoDigit(date.getMonth() + 1) + "-" + getTwoDigit(date.getDate()) + "T" + getTwoDigit(date.getHours()) + ":" + getTwoDigit(date.getMinutes());
 
   const addOption = async () => {
     setIsSubmit(true);
-    if (
-      form.currency &&
-      form.currencyLogo &&
-      form.expiry &&
-      form.value &&
-      account === process.env.REACT_APP_ADMIN_WALLET
-    ) {
+    if (form.currency && form.currencyLogo && form.expiry && form.value && account === process.env.REACT_APP_ADMIN_WALLET) {
       setIsLoading(true);
       try {
-        const res = await deploy(
-          parseInt(+new Date(form.expiry.replace("T", " ")) / 1000),
-          +form.value,
-          form.currency
-        );
+        const res = await deploy(parseInt(+new Date(form.expiry.replace("T", " ")) / 1000), +form.value, form.currency);
 
         pinOptionData(
           {
@@ -203,22 +171,13 @@ const AddOption = () => {
   return (
     <div className="addoption">
       {isLoading && <Spinner />}
-      <div
-        className="input_filed"
-        style={{ display: "block", fontSize: 24, color: "#86c440" }}
-      >
+      <div className="input_filed" style={{ display: "block", fontSize: 24, color: "#86c440" }}>
         Add Option
       </div>
       <div className="input_filed">
         <div className="input_title">Currency</div>
         <div className="input_text_option">
-          <select
-            className="currency-option"
-            name="currency"
-            onChange={(event) =>
-              setForm({ ...form, currency: event.target.value })
-            }
-          >
+          <select className="currency-option" name="currency" onChange={(event) => setForm({ ...form, currency: event.target.value })}>
             <option>Select Currency</option>
             {OPTIONS.map(({ label, value }) => {
               return (
@@ -229,9 +188,7 @@ const AddOption = () => {
             })}
           </select>
         </div>
-        {isSubmit && !form.currency && (
-          <div className="addoptionerror">*Invalid value</div>
-        )}
+        {isSubmit && !form.currency && <div className="addoptionerror">*Invalid value</div>}
       </div>
       <div className="input_filed">
         <div className="input_title">Currency Logo</div>
@@ -266,43 +223,21 @@ const AddOption = () => {
             style={{ width: "100%", fontSize: 16 }}
           />
         </div>
-        {isSubmit && !form.currencyLogo && (
-          <div className="addoptionerror">*Invalid value</div>
-        )}
+        {isSubmit && !form.currencyLogo && <div className="addoptionerror">*Invalid value</div>}
       </div>
       <div className="input_filed">
         <div className="input_title">Expiry</div>
         <div className="input_text_option">
-          <input
-            type="datetime-local"
-            className="text"
-            min={minDate}
-            value={form.expiry}
-            onChange={(event) =>
-              setForm({ ...form, expiry: event.target.value })
-            }
-            style={{ fontSize: 16 }}
-          />
+          <input type="datetime-local" className="text" min={minDate} value={form.expiry} onChange={(event) => setForm({ ...form, expiry: event.target.value })} style={{ fontSize: 16 }} />
         </div>
-        {isSubmit && !form.expiry && (
-          <div className="addoptionerror">*Invalid value</div>
-        )}
+        {isSubmit && !form.expiry && <div className="addoptionerror">*Invalid value</div>}
       </div>
       <div className="input_filed">
         <div className="input_title">Strike Price</div>
         <div className="input_text_option">
-          <input
-            type="number"
-            className="text"
-            value={form.value}
-            onChange={(event) =>
-              setForm({ ...form, value: event.target.value })
-            }
-          />
+          <input type="number" className="text" value={form.value} onChange={(event) => setForm({ ...form, value: event.target.value })} />
         </div>
-        {isSubmit && !form.value && (
-          <div className="addoptionerror">*Invalid value</div>
-        )}
+        {isSubmit && !form.value && <div className="addoptionerror">*Invalid value</div>}
       </div>
       <div className="input_filed" style={{ display: "block" }}>
         <button className="Add_Option_Button" onClick={() => addOption()}>

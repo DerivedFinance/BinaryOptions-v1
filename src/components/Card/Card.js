@@ -6,14 +6,7 @@ import { useWeb3React } from "@web3-react/core";
 import { useOptionContract } from "../../hooks";
 import CountdownTimer from "../OptionCard/countDownTimer";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-const Card = ({
-  id,
-  onCardClick,
-  currency,
-  currencyLogo,
-  onEnded = undefined,
-  type,
-}) => {
+const Card = ({ id, onCardClick, currency, currencyLogo, onEnded = undefined, type }) => {
   const { account } = useWeb3React();
   const [options, setOptions] = useState({
     short: 0,
@@ -31,19 +24,11 @@ const Card = ({
     const getLongs = async () => {
       setIsLoading(true);
       try {
-        const long = await OptionContract.methods
-          .getLongs()
-          .call({ from: account });
-        const short = await OptionContract.methods
-          .getShorts()
-          .call({ from: account });
-        const strikePrice = await OptionContract.methods
-          .getStrikePrice()
-          .call({ from: account });
+        const long = await OptionContract.methods.getLongs().call({ from: account });
+        const short = await OptionContract.methods.getShorts().call({ from: account });
+        const strikePrice = await OptionContract.methods.getStrikePrice().call({ from: account });
 
-        const epochContractExpiry = await OptionContract.methods
-          .getContractExpiry()
-          .call({ from: account });
+        const epochContractExpiry = await OptionContract.methods.getContractExpiry().call({ from: account });
 
         const hasContractExpire = await OptionContract.methods
           .hasContractExpire()
@@ -60,7 +45,7 @@ const Card = ({
         setOptions({
           long: Number(long),
           short: Number(short),
-          longPercentage:totalOptions > 0 ? longPercentage : 0,
+          longPercentage: totalOptions > 0 ? longPercentage : 0,
           shortPercentage: totalOptions > 0 ? 100 - longPercentage : 0,
           strikePrice,
           contractExpiry,
@@ -76,7 +61,7 @@ const Card = ({
   }, []);
   return (
     <>
-      {!contractExpiry && options.contractExpiry > new Date()? (
+      {!contractExpiry && options.contractExpiry > new Date() ? (
         <div className="Card" onClick={() => onCardClick(id)}>
           <section className="Card_main">
             <article className="StakeItemCard_component">
@@ -118,10 +103,7 @@ const Card = ({
                           <Skeleton width={150} />
                         </SkeletonTheme>
                       ) : (
-                        "by " +
-                        (isValidDate(options.contractExpiry)
-                          ? formatTxTimestamp(options.contractExpiry)
-                          : formatTxTimestamp(Date.now()))
+                        "" + (isValidDate(options.contractExpiry) ? formatTxTimestamp(options.contractExpiry) : formatTxTimestamp(Date.now()))
                       )}
                     </h6>
                   </article>

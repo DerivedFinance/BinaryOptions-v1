@@ -3,22 +3,11 @@ import { useWeb3React } from "@web3-react/core";
 import { useOptionContract } from "../../hooks";
 import pinataSDK from "@pinata/sdk";
 
-const SideCard = ({
-  onCardClick,
-  contractExpire,
-  currency,
-  currencyLogo,
-  contract,
-  ipfs_pin_hash,
-  date_unpinned,
-}) => {
+const SideCard = ({ onCardClick, contractExpire, currency, currencyLogo, contract, ipfs_pin_hash, date_unpinned }) => {
   const { account } = useWeb3React();
   const [contractExpiry, setContractExpiry] = useState(false);
   const OptionContract = useOptionContract(contract);
-  const pinata = pinataSDK(
-    process.env.REACT_APP_PINATA_API_KEY,
-    process.env.REACT_APP_PINATA_SECRET_KEY
-  );
+  const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_SECRET_KEY);
   useEffect(() => {
     const getLongs = async () => {
       try {
@@ -49,26 +38,11 @@ const SideCard = ({
     <>
       {account && contractExpiry && (
         <div className="sidecard">
-          <div
-            key={contract}
-            className="expired_list"
-            onClick={() => onCardClick(contract)}
-          >
-            <img
-              width="40"
-              height="40"
-              src={
-                currencyLogo ||
-                "https://gateway.pinata.cloud/ipfs/QmNRYGM4mgbFp83ff7KFXQrieFiNk9zuWTmD1CqiuDAPB8"
-              }
-              alt={currency}
-              className="expired_image"
-            />
+          <div key={contract} className="expired_list" onClick={() => onCardClick(contract)}>
+            <img width="40" height="40" src={currencyLogo || "https://gateway.pinata.cloud/ipfs/QmNRYGM4mgbFp83ff7KFXQrieFiNk9zuWTmD1CqiuDAPB8"} alt={currency} className="expired_image" />
             <div className="expired_currency">{currency}</div>
           </div>
-          <div className="tooltip_hover">
-            {contract?.length > 10 ? contract.slice(0, 10) + "..." : contract}
-          </div>
+          <div className="tooltip_hover">{contract?.length > 10 ? contract.slice(0, 10) + "..." : contract}</div>
         </div>
       )}
     </>

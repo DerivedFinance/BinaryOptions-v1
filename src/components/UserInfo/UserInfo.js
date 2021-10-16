@@ -226,7 +226,7 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
                   </div>
                 </div>
               )}
-              {shouldDisplayAdminFunctions() && (
+              {shouldDisplayAdminFunctions() && isAdmin && (
                 <div className="user-info-wallet-address">
                   <div className="admin-function-title">
                     <span>Admin Functions</span>
@@ -238,11 +238,7 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
                   <div className="wallet-button margin-top-10" onClick={() => onResultAnnounceClick(true)}>
                     Announce Result
                   </div>
-                  <div
-                    className="wallet-button margin-top-10"
-                    onClick={() => setPauseModal(true)}
-                    style={{ color: isPause ? "red" : "green" }}
-                  >
+                  <div className="wallet-button margin-top-10" onClick={() => setPauseModal(true)} style={{ color: isPause ? "red" : "green" }}>
                     Pause
                   </div>
                 </div>
@@ -269,22 +265,8 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
           <h1> Select value </h1>
           <Form>
             <div className="mb-3">
-              <Form.Check
-                className="mb-3"
-                type="radio"
-                name="select"
-                value={true}
-                label="True"
-                onChange={(event) => setFormValue({ ...formValue, admin: event.target.value })}
-              />
-              <Form.Check
-                className="mb-3"
-                type="radio"
-                name="select"
-                value={false}
-                label="False"
-                onChange={(event) => setFormValue({ ...formValue, admin: event.target.value })}
-              />
+              <Form.Check className="mb-3" type="radio" name="select" value={true} label="True" onChange={(event) => setFormValue({ ...formValue, admin: event.target.value })} />
+              <Form.Check className="mb-3" type="radio" name="select" value={false} label="False" onChange={(event) => setFormValue({ ...formValue, admin: event.target.value })} />
               <Button onClick={() => onSetAdminClick(formValue.admin)}>Set Admin</Button>
             </div>
           </Form>
@@ -294,22 +276,8 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
           <h1> Select value </h1>
           <Form>
             <div className="mb-3">
-              <Form.Check
-                className="mb-3"
-                type="radio"
-                name="select"
-                value={true}
-                label="True"
-                onChange={(event) => setFormValue({ ...formValue, pause: event.target.value })}
-              />
-              <Form.Check
-                className="mb-3"
-                type="radio"
-                name="select"
-                value={false}
-                label="False"
-                onChange={(event) => setFormValue({ ...formValue, pause: event.target.value })}
-              />
+              <Form.Check className="mb-3" type="radio" name="select" value={true} label="True" onChange={(event) => setFormValue({ ...formValue, pause: event.target.value })} />
+              <Form.Check className="mb-3" type="radio" name="select" value={false} label="False" onChange={(event) => setFormValue({ ...formValue, pause: event.target.value })} />
               <Button onClick={() => onPauseClick(formValue.pause)}>Pause</Button>
             </div>
           </Form>

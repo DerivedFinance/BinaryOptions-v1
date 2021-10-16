@@ -22,14 +22,7 @@ import { pinActivityData } from "../../utils/storeData";
 import Spinner from "./../../components/Spinner/Spinner";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import toasterMessage from "../../utils/toasterMessage";
-import {
-  LONG_FAILED,
-  LONG_SUCCESS,
-  SHORT_FAILED,
-  SHORT_SUCCESS,
-  CLAIM_FAILED,
-  CLAIM_SUCCESS,
-} from "../../constants";
+import { LONG_FAILED, LONG_SUCCESS, SHORT_FAILED, SHORT_SUCCESS, CLAIM_FAILED, CLAIM_SUCCESS } from "../../constants";
 
 const Option = () => {
   const [contractDetails, setContractDetails] = useState({
@@ -43,10 +36,7 @@ const Option = () => {
   const { result } = usePinataActivities(account, contractAddress);
   const { optionList } = usePinataOptions(process.env.REACT_APP_ADMIN_WALLET);
   let opt = {};
-  const options = useMemo(
-    () => optionList?.filter((option) => option.contract === contractAddress),
-    [optionList.length,contractAddress]
-  );
+  const options = useMemo(() => optionList?.filter((option) => option.contract === contractAddress), [optionList.length, contractAddress]);
   opt = options?.length > 0 && options[0];
   if (result) {
     for (let i = 0; i < result.length; i++) {
@@ -83,13 +73,9 @@ const Option = () => {
         if (!optionContract) {
           return;
         }
-        const price = await optionContract.methods
-          .getStrikePrice()
-          .call({ from: account });
+        const price = await optionContract.methods.getStrikePrice().call({ from: account });
 
-        const bidPeriod = await optionContract.methods
-          .getBidPeriodLimit()
-          .call({ from: account });
+        const bidPeriod = await optionContract.methods.getBidPeriodLimit().call({ from: account });
         setContractDetails({
           price,
           hasBidEnded: Date.now() > bidPeriod * 1000,
@@ -310,11 +296,7 @@ const Option = () => {
       <div className="option-container">
         <div className="bid-container">
           <section className="Option_images">
-            <button
-              className="Button_button"
-              onClick={onBack}
-              style={{ padding: "5px", color: "white" }}
-            >
+            <button className="Button_button" onClick={onBack} style={{ padding: "5px", color: "white" }}>
               <ArrowBack />
             </button>
             <div style={{ margin: "auto" }}>
@@ -325,16 +307,7 @@ const Option = () => {
                   </section>
                 </SkeletonTheme>
               ) : (
-                <img
-                  width="40"
-                  height="40"
-                  src={
-                    opt?.currencyLogo ||
-                    "https://gateway.pinata.cloud/ipfs/QmNRYGM4mgbFp83ff7KFXQrieFiNk9zuWTmD1CqiuDAPB8"
-                  }
-                  alt=""
-                  style={{ borderRadius: 20 }}
-                />
+                <img width="40" height="40" src={opt?.currencyLogo || "https://gateway.pinata.cloud/ipfs/QmNRYGM4mgbFp83ff7KFXQrieFiNk9zuWTmD1CqiuDAPB8"} alt="" style={{ borderRadius: 20 }} />
               )}
               &nbsp;&nbsp;&nbsp;
               {isLoading ? (
@@ -360,18 +333,9 @@ const Option = () => {
           />
         </div>
 
-        <input
-          type="text"
-          className="activity_search"
-          placeholder="Search by type or Position"
-          onChange={textchange}
-        />
+        <input type="text" className="activity_search" placeholder="Search by type or Position" onChange={textchange} />
         <div className="row scroller">
-          <BaseTable
-            header={["Time", "Type", "Position", "Amount", "Tx"]}
-            data={result.length > 0 ? result : []}
-            search={search}
-          />
+          <BaseTable header={["Time", "Bid", "Position", "Amount", "Tx"]} data={result.length > 0 ? result : []} search={search} />
         </div>
       </div>
     </>
