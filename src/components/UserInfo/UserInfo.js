@@ -78,8 +78,7 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
       setIsAdmin(true);
     }
   }, [account]);
-  const shouldDisplayAdminFunctions = () =>
-    location.pathname.includes("/options");
+  const shouldDisplayAdminFunctions = () => location.pathname.includes("/options");
 
   const onSetAdminClick = async (value) => {
     setIsOperation(true);
@@ -107,12 +106,22 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
   };
   const onResultAnnounceClick = async (value) => {
     setIsOperation(true);
-    const epochContractExpiry = await optionContract.methods.getContractExpiry().call({ from: account }).catch((err) => {});
+    const epochContractExpiry = await optionContract.methods
+      .getContractExpiry()
+      .call({ from: account })
+      .catch((err) => {});
+    const isAdminEnabled = await optionContract.methods
+      .isAdminEnabled()
+      .call({ from: account })
+      .catch((err) => {});
     const contractExpiry = new Date(0);
     contractExpiry.setUTCSeconds(epochContractExpiry);
-    if(contractExpiry < new Date()){
-      const hasContractExpire = await optionContract.methods.hasContractExpire().call({from:account}).catch((err) => {});
-      if(!hasContractExpire){
+    if (contractExpiry < new Date() || isAdminEnabled) {
+      const hasContractExpire = await optionContract.methods
+        .hasContractExpire()
+        .call({ from: account })
+        .catch((err) => {});
+      if (!hasContractExpire) {
         optionContract.methods
           .announceResult()
           .estimateGas({ from: account })
@@ -178,17 +187,11 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
           <div className="user-address-wrapper">
             <div className="wallet-status" />
             <div className="user-address">{truncateAddress(address)}</div>
-            <div className="wallet-network">
-              {SUPPORTED_CHAINS[chainId] || "UNSUPPORTED"}
-            </div>
+            <div className="wallet-network">{SUPPORTED_CHAINS[chainId] || "UNSUPPORTED"}</div>
           </div>
           <div className="dropdown-wallet-icon">
             <img src={walletIcon} alt="wallet-icon" />
-            {isDropdownOpen ? (
-              <img src={sortUp} alt="sort-up" />
-            ) : (
-              <img src={sortDown} alt="sort-down" />
-            )}
+            {isDropdownOpen ? <img src={sortUp} alt="sort-up" /> : <img src={sortDown} alt="sort-down" />}
           </div>
         </div>
         {isDropdownOpen && (
@@ -208,26 +211,17 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
                   }}
                   className="copyaddress"
                 >
-                  <Tooltip
-                    top
-                    visible={copiedText ? true : false}
-                    content={<p className="tooltipcontent">Copied!</p>}
-                  >
+                  <Tooltip top visible={copiedText ? true : false} content={<p className="tooltipcontent">Copied!</p>}>
                     <span className="copyIcon">
                       <FileCopyOutlinedIcon />
                     </span>
                   </Tooltip>
-                  <span className="address">{`${address
-                    .substring(0, 10)
-                    .trim()}...`}</span>
+                  <span className="address">{`${address.substring(0, 10).trim()}...`}</span>
                 </div>
               </div>
               {isAdmin && (
                 <div className="user-info-wallet-address">
-                  <div
-                    className="wallet-button"
-                    onClick={() => history.push("/add-option")}
-                  >
+                  <div className="wallet-button" onClick={() => history.push("/add-option")}>
                     Add Option
                   </div>
                 </div>
@@ -238,16 +232,10 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
                     <span>Admin Functions</span>
                   </div>
 
-                  <div
-                    className="wallet-button margin-top-10"
-                    onClick={() => setAdminModal(true)}
-                  >
+                  <div className="wallet-button margin-top-10" onClick={() => setAdminModal(true)}>
                     Set Admin
                   </div>
-                  <div
-                    className="wallet-button margin-top-10"
-                    onClick={() => onResultAnnounceClick(true)}
-                  >
+                  <div className="wallet-button margin-top-10" onClick={() => onResultAnnounceClick(true)}>
                     Announce Result
                   </div>
                   <div
@@ -277,11 +265,7 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
             </div>
           </div>
         )}
-        <Modal
-          isOpen={adminModal}
-          onRequestClose={() => setAdminModal(false)}
-          style={customStyles}
-        >
+        <Modal isOpen={adminModal} onRequestClose={() => setAdminModal(false)} style={customStyles}>
           <h1> Select value </h1>
           <Form>
             <div className="mb-3">
@@ -291,9 +275,7 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
                 name="select"
                 value={true}
                 label="True"
-                onChange={(event) =>
-                  setFormValue({ ...formValue, admin: event.target.value })
-                }
+                onChange={(event) => setFormValue({ ...formValue, admin: event.target.value })}
               />
               <Form.Check
                 className="mb-3"
@@ -301,22 +283,14 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
                 name="select"
                 value={false}
                 label="False"
-                onChange={(event) =>
-                  setFormValue({ ...formValue, admin: event.target.value })
-                }
+                onChange={(event) => setFormValue({ ...formValue, admin: event.target.value })}
               />
-              <Button onClick={() => onSetAdminClick(formValue.admin)}>
-                Set Admin
-              </Button>
+              <Button onClick={() => onSetAdminClick(formValue.admin)}>Set Admin</Button>
             </div>
           </Form>
         </Modal>
 
-        <Modal
-          isOpen={pauseModal}
-          onRequestClose={() => setPauseModal(false)}
-          style={customStyles}
-        >
+        <Modal isOpen={pauseModal} onRequestClose={() => setPauseModal(false)} style={customStyles}>
           <h1> Select value </h1>
           <Form>
             <div className="mb-3">
@@ -326,9 +300,7 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
                 name="select"
                 value={true}
                 label="True"
-                onChange={(event) =>
-                  setFormValue({ ...formValue, pause: event.target.value })
-                }
+                onChange={(event) => setFormValue({ ...formValue, pause: event.target.value })}
               />
               <Form.Check
                 className="mb-3"
@@ -336,26 +308,16 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
                 name="select"
                 value={false}
                 label="False"
-                onChange={(event) =>
-                  setFormValue({ ...formValue, pause: event.target.value })
-                }
+                onChange={(event) => setFormValue({ ...formValue, pause: event.target.value })}
               />
-              <Button onClick={() => onPauseClick(formValue.pause)}>
-                Pause
-              </Button>
+              <Button onClick={() => onPauseClick(formValue.pause)}>Pause</Button>
             </div>
           </Form>
         </Modal>
 
-        <Modal
-          isOpen={error}
-          onRequestClose={() => setError(null)}
-          style={customStyles}
-        >
+        <Modal isOpen={error} onRequestClose={() => setError(null)} style={customStyles}>
           <div className="mb-2">
-            <div className="row mt-4 text-center ml-auto mr-auto wrong-network">
-              {error || "Something went wrong"}
-            </div>
+            <div className="row mt-4 text-center ml-auto mr-auto wrong-network">{error || "Something went wrong"}</div>
           </div>
         </Modal>
       </div>

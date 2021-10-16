@@ -13,22 +13,11 @@ import { useDVDBalance, useOptionContract } from "../../hooks";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Form } from "react-bootstrap";
 
-const BidCard = ({
-  onLongClick,
-  onShortClick,
-  contractAddress,
-  price,
-  hasBidEnded,
-  claimed,
-  onClaimClick,
-  isLoading,
-  isPaused,
-  onPauseError,
-}) => {
+const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnded, claimed, onClaimClick, isLoading, isPaused, onPauseError }) => {
   const { active, account } = useWeb3React();
   const ClaimContract = useOptionContract(contractAddress);
   const [bidAmount, setBidAmount] = useState(1);
-  const [isWinner,setIsWinner] = useState(false);
+  const [isWinner, setIsWinner] = useState(false);
   const [hasContractExpire, setHasContractExpire] = useState(false);
   const [DVDBalanceError, setDVDBalanceError] = useState(false);
   const DVDBalance = useDVDBalance();
@@ -49,12 +38,12 @@ const BidCard = ({
       };
       getOwner();
     }
-  }, [ClaimContract,account,hasBidEnded,claimed]);
+  }, [ClaimContract, account, hasBidEnded, claimed]);
 
   useEffect(() => {
     setBidAmount(1);
-  },[claimed])
-  
+  }, [claimed]);
+
   const modifyBidAmount = (bid) => {
     if (bid === "inc") setBidAmount(+bidAmount + 1);
     else if (bid === "dec" && bidAmount > 0) setBidAmount(+bidAmount - 1);
@@ -65,14 +54,14 @@ const BidCard = ({
         <article className="Card_component">
           <div className="Bid_Card_main">
             <section className="BidTokenPair_images">
-              <p style={{ fontSize: 20,color:'#86c440' }}>Pick a side to place a bid</p>
+              <p style={{ fontSize: 20, color: "#86c440" }}>Pick a side to place a bid</p>
             </section>
             <section>
               <article className="Card_item">
                 <h1 className="Card_title">Price</h1>
                 <h6 className="Card_content">
                   {isLoading && active ? (
-                    <SkeletonTheme color="#333" highlightColor="#888">
+                    <SkeletonTheme color="#333" highlightColor="#888">x
                       <Skeleton width={50} />
                     </SkeletonTheme>
                   ) : (
@@ -87,41 +76,23 @@ const BidCard = ({
               <SkeletonTheme color="#333" highlightColor="#888">
                 <Skeleton height={30} />
               </SkeletonTheme>
-            ) : (hasContractExpire || hasBidEnded || isPaused) ? (
+            ) : hasContractExpire || hasBidEnded || isPaused ? (
               isPaused ? (
-                <button className="Button_button bid-ended">
-                  Contract is on paused
-                </button>
-              ) : (
-                (isWinner)? (
-                <button
-                  className="Button_button bid-claim"
-                  onClick={() => onClaimClick()}
-                >
+                <button className="Button_button bid-ended">Contract is on paused</button>
+              ) : isWinner ? (
+                <button className="Button_button bid-claim" onClick={() => onClaimClick()}>
                   Claim
                 </button>
-                ) : (
-                <button className="Button_button bid-ended">
-                  {hasContractExpire ? "Bid has been ended":"Winner Not Announce"}
-                </button>
-                )
+              ) : (
+                <button className="Button_button bid-ended">{hasContractExpire ? "Bid has been ended" : "Winner Not Announce"}</button>
               )
             ) : (
               <>
-                <div
-                  className="mb-3 input_text"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
+                <div className="mb-3 input_text" style={{ display: "flex", alignItems: "center" }}>
                   <div className="dec" onClick={() => modifyBidAmount("dec")}>
                     <Remove />
                   </div>
-                  <Form.Check
-                    type="number"
-                    name="select"
-                    placeholder="Enter Bid Amount"
-                    value={bidAmount}
-                    onChange={(event) => setBidAmount(parseInt(event.target.value))}
-                  />
+                  <Form.Check type="number" name="select" placeholder="Enter Bid Amount" value={bidAmount} onChange={(event) => setBidAmount(parseInt(event.target.value))} />
                   <div className="inc" onClick={() => modifyBidAmount("inc")}>
                     <Add />
                   </div>
@@ -130,10 +101,9 @@ const BidCard = ({
                   <button
                     className="Button_button long_sort_button"
                     onClick={() => {
-                      if(DVDBalance < bidAmount){
+                      if (DVDBalance < bidAmount) {
                         setDVDBalanceError(true);
-                      }
-                      else if (bidAmount > 0) onLongClick(bidAmount);
+                      } else if (bidAmount > 0) onLongClick(bidAmount);
                     }}
                   >
                     Long
@@ -142,26 +112,17 @@ const BidCard = ({
                   <button
                     className="Button_button long_sort_button short_color"
                     onClick={() => {
-                      if(DVDBalance < bidAmount){
+                      if (DVDBalance < bidAmount) {
                         setDVDBalanceError(true);
-                      }
-                      else if (bidAmount > 0) onShortClick(bidAmount);
+                      } else if (bidAmount > 0) onShortClick(bidAmount);
                     }}
                   >
                     Short
                     <TrendingDown />
                   </button>
                 </div>
-                <div>
-                  {onPauseError && (
-                    <p className="onpause_error_text"> Contract is on pause</p>
-                  )}
-                </div>
-                <div>
-                  {DVDBalanceError && (
-                    <p className="DVD_Balance_error_text"> You don't have enough USDx.</p>
-                  )}
-                </div>
+                <div>{onPauseError && <p className="onpause_error_text"> Contract is on pause</p>}</div>
+                <div>{DVDBalanceError && <p className="DVD_Balance_error_text"> You don't have enough USDx.</p>}</div>
               </>
             )
           ) : (
