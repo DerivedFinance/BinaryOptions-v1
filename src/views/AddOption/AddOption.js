@@ -65,15 +65,15 @@ const deploy = async (endtime, strikePrice, currency) => {
         break;
 
       case "FIL":
-        aggregator = "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7";
+        aggregator = "0x17308A18d4a50377A4E1C37baaD424360025C74D";
         break;
 
       case "LINK":
-        aggregator = "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7";
+        aggregator = "0x1B329402Cb1825C6F30A0d92aB9E2862BE47333f";
         break;
 
       case "MATIC":
-        aggregator = "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7";
+        aggregator = "0x957Eb0316f02ba4a9De3D308742eefd44a3c1719";
         break;
 
       case "REEF":
