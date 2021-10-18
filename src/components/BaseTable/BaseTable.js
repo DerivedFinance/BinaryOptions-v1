@@ -40,11 +40,7 @@ const BaseTable = ({ header = [], data = [], search = "" }) => {
   const newData = useMemo(
     () =>
       data.filter((activity) => {
-        return (
-          activity.position?.toString().match(regex) ||
-          activity.type?.toString().match(regex) ||
-          activity.amount?.toString().match(regex)
-        );
+        return activity.position?.toString().match(regex) || activity.type?.toString().match(regex) || activity.amount?.toString().match(regex);
       }),
     [data.length, search]
   );
@@ -85,7 +81,7 @@ const BaseTable = ({ header = [], data = [], search = "" }) => {
             })}
             {activity.length === 0 && (
               <tr>
-                <td className="no-data">No data avaiable</td>
+                <td className="no-data">No data</td>
               </tr>
             )}
           </tbody>
