@@ -2,10 +2,9 @@
   border-radius: 10px;
   position: relative;
   min-width: 290px;
-  width:calc(33% - 30px);
+  width: calc(33% - 30px);
   margin: 15px;
-  box-shadow:  4px 4px 6px rgba(0,0,0,0.8),
-    -4px -4px 6px #494949;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8), -4px -4px 6px #494949;
   cursor: pointer;
 }
 .Card_main {
@@ -50,14 +49,13 @@
   margin: 12px 0px;
   text-decoration: none;
 }
-.StakeItemButton_button:hover{
+.StakeItemButton_button:hover {
   background-color: #47d7e2;
   color: black;
 }
 .TokenPair_images .TokenPair_fill {
   z-index: 1;
-  box-shadow:  2px 2px 3px rgba(0,0,0,0.8),
-  -2px -2px 3px #494949;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8), -2px -2px 3px #494949;
 }
 .TokenPair_images .TokenPair_fill,
 .TokenPair_images .TokenPair_outline {
@@ -101,7 +99,7 @@
 a:hover {
   text-decoration: none;
 }
-@media (max-width:760px){
+@media (max-width: 760px) {
   .Card {
     width: calc(95%);
   }

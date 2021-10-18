@@ -6,22 +6,21 @@
   width: 16px;
   height: 16px;
 }
-.Bidcard{
+.Bidcard {
   width: 400px !important;
   margin: auto;
   border-radius: 10px;
-  box-shadow:  4px 4px 6px rgba(0,0,0,0.8),
-    -4px -4px 6px #494949;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8), -4px -4px 6px #494949;
 }
-.onpause_error_text{
+.onpause_error_text {
   font-size: 15px;
   margin-top: 6px;
 }
-@media (max-width:760px) {
+@media (max-width: 760px) {
   .Bidcard {
     width: 320px !important;
   }
-  .onpause_error_text{
+  .onpause_error_text {
     font-size: 10px;
     margin-top: 3px;
   }
@@ -38,7 +37,7 @@
   justify-content: center !important;
 }
 
-.long_sort_button{
+.long_sort_button {
   width: 48%;
 }
 
@@ -46,7 +45,8 @@
   color: salmon !important;
 }
 
-.short_color:hover, .short_color:active {
+.short_color:hover,
+.short_color:active {
   background-color: salmon !important;
   color: #17141a !important;
 }
@@ -87,10 +87,9 @@
   padding: 5px 20px;
   margin-top: 10px;
   text-decoration: none;
-  box-shadow:  2px 2px 4px rgba(0,0,0,0.8),
-    -2px -2px 4px #494949;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), -2px -2px 4px #494949;
 }
-.Button_button:hover{
+.Button_button:hover {
   background-color: #86c440;
   color: #17141a;
   text-align: center;
@@ -121,7 +120,7 @@
   display: flex;
   justify-content: space-between;
 }
-input[type=number].form-check-input {
+input[type="number"].form-check-input {
   background: transparent;
   border: none;
   padding-left: 6px;
@@ -130,7 +129,7 @@ input[type=number].form-check-input {
   height: 32px;
   text-align: center;
 }
-.input_text{
+.input_text {
   border-radius: 7px;
   border: 2px solid gray;
 }
@@ -138,16 +137,16 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
-.form-check{
+.form-check {
   width: 100%;
 }
-.inc{
+.inc {
   padding-right: 10px;
 }
-.dec{
+.dec {
   padding-left: 10px;
 }
-.DVD_Balance_error_text{
+.DVD_Balance_error_text {
   color: tomato;
   margin-top: 10px;
   text-align: left;

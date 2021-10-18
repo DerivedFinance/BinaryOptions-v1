@@ -84,7 +84,7 @@ const Card = ({ id, onCardClick, currency, currencyLogo, onEnded = undefined, ty
                 </header>
                 <section>
                   <article className="StakeItemCard_item">
-                    <h1 className="StakeItemCard_title">Time Left</h1>
+                    <h1 className="StakeItemCard_title">Time Remaining</h1>
                     <h6 className="StakeItemCard_content">
                       {isLoading ? (
                         <SkeletonTheme color="#333" highlightColor="#888">
@@ -108,7 +108,7 @@ const Card = ({ id, onCardClick, currency, currencyLogo, onEnded = undefined, ty
                     </h6>
                   </article>
                   <article className="StakeItemCard_item">
-                    <h1 className="StakeItemCard_title">Price</h1>
+                    <h1 className="StakeItemCard_title">Strike Price</h1>
                     <h6 className="StakeItemCard_content">
                       {isLoading ? (
                         <SkeletonTheme color="#333" highlightColor="#888">

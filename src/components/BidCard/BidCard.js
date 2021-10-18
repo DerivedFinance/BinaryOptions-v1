@@ -61,7 +61,8 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                 <h1 className="Card_title">Price</h1>
                 <h6 className="Card_content">
                   {isLoading && active ? (
-                    <SkeletonTheme color="#333" highlightColor="#888">x
+                    <SkeletonTheme color="#333" highlightColor="#888">
+                      x
                       <Skeleton width={50} />
                     </SkeletonTheme>
                   ) : (
@@ -84,7 +85,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                   Claim
                 </button>
               ) : (
-                <button className="Button_button bid-ended">{hasContractExpire ? "Bid has been ended" : "Winner Not Announce"}</button>
+                <button className="Button_button bid-ended">{hasContractExpire ? "Bidding Ended" : "Winner Not Announced"}</button>
               )
             ) : (
               <>

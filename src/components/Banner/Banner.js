@@ -9,7 +9,7 @@ const Banner = () => {
       <section className="main">
         <header>
           <h1 className="heading">On-chain exposure to any asset class</h1>
-          <section className="encourage">Trade cryptocurrencies options (long and short).</section>
+          <section className="encourage">Trade Cryptocurrency Options (Long and Short).</section>
           {!account && <section className="encourage">Please connect to the appropriate BSC network.</section>}
         </header>
       </section>
