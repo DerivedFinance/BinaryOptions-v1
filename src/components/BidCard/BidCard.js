@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 
+import { formatTxTimestamp, isValidDate } from "../../utils/formatters";
+
 import MetamaskButton from "../MetamaskButton/MetamaskButton";
 
 import TrendingUp from "@material-ui/icons/TrendingUp";
@@ -19,6 +21,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
   const [bidAmount, setBidAmount] = useState(1);
   const [isWinner, setIsWinner] = useState(false);
   const [hasContractExpire, setHasContractExpire] = useState(false);
+  const [getContractExpiry, setGetContractExpiry] = useState({});
   const [DVDBalanceError, setDVDBalanceError] = useState(false);
   const DVDBalance = useDVDBalance();
 
@@ -30,11 +33,21 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
           .call({ from: account })
           .catch((error) => {});
         setIsWinner(isWinner);
+
         const hasContractExpire = await ClaimContract.methods
           .hasContractExpire()
           .call({ from: account })
           .catch((error) => {});
         setHasContractExpire(hasContractExpire);
+
+        const getContractExpiry = await ClaimContract.methods
+          .getContractExpiry()
+          .call({ from: account })
+          .catch((error) => {});
+        const contractExpiry = new Date(0);
+        contractExpiry.setUTCSeconds(getContractExpiry);
+        // setGetContractExpiry(contractExpiry);
+        setGetContractExpiry(isValidDate(contractExpiry) ? formatTxTimestamp(contractExpiry) : formatTxTimestamp(Date.now()));
       };
       getOwner();
     }
@@ -58,7 +71,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
             </section>
             <section>
               <article className="Card_item">
-                <h1 className="Card_title">Price</h1>
+                <h1 className="Card_title">Strike Price</h1>
                 <h6 className="Card_content">
                   {isLoading && active ? (
                     <SkeletonTheme color="#333" highlightColor="#888">
@@ -67,6 +80,21 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                     </SkeletonTheme>
                   ) : (
                     "$" + price
+                  )}
+                </h6>
+              </article>
+            </section>
+            <section>
+              <article className="Card_item">
+                <h1 className="Card_title">Expiry</h1>
+                <h6 className="Card_content">
+                  {isLoading && active ? (
+                    <SkeletonTheme color="#333" highlightColor="#888">
+                      x
+                      <Skeleton width={50} />
+                    </SkeletonTheme>
+                  ) : (
+                    "" + getContractExpiry
                   )}
                 </h6>
               </article>
