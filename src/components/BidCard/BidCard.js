@@ -151,7 +151,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                   </button>
                 </div>
                 <div>{onPauseError && <p className="onpause_error_text"> Contract is on pause</p>}</div>
-                <div>{DVDBalanceError && <p className="DVD_Balance_error_text"> You don't have enough USDx.</p>}</div>
+                <div>{DVDBalanceError && <p className="DVD_Balance_error_text"> Insufficient USDx balance.</p>}</div>
               </>
             )
           ) : (

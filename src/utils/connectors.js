@@ -2,7 +2,7 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 
 // Add different connectors
 export const injected = new InjectedConnector({
-  supportedChainIds: [56], // Change according to supported Network Ids
+  supportedChainIds: [97], // Change according to supported Network Ids
 });
 
 export const SUPPORTED_CHAINS = {
