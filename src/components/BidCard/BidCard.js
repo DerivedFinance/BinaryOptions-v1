@@ -14,6 +14,8 @@ import "./BidCard.css";
 import { useDVDBalance, useOptionContract } from "../../hooks";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Form } from "react-bootstrap";
+import CountdownTimer from "../OptionCard/countDownTimer";
+
 
 const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnded, claimed, onClaimClick, isLoading, isPaused, onPauseError }) => {
   const { active, account } = useWeb3React();
@@ -24,6 +26,10 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
   const [getContractExpiry, setGetContractExpiry] = useState({});
   const [DVDBalanceError, setDVDBalanceError] = useState(false);
   const [getAssetPrice, setGetAssetPrice] = useState({});
+  const [BidEnd, setGetContractBidEnd] = useState({});
+  const [options, setOptions] = useState({
+    BidEnd: new Date(),
+  });
   const DVDBalance = useDVDBalance();
 
   useEffect(() => {
@@ -56,6 +62,20 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
           .call({ from: account })
           .catch((error) => {});
         setGetAssetPrice(currentPrice);
+
+        //get Bidding End Date
+        const getContractBidEnd = await ClaimContract.methods
+          .getBidPeriodLimit()
+          .call({ from: account })
+          .catch((error) => {});
+        setGetContractBidEnd(hasContractExpire);
+        const BidEnd = new Date(0);
+        BidEnd.setUTCSeconds(getContractBidEnd);
+
+        // Set the Bid Ending date in Time format
+        setOptions({
+          BidEnd,
+        });
       };
       getOwner();
     }
@@ -109,7 +129,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
             </section>
             <section>
               <article className="Card_item">
-                <h1 className="Card_title">Expiry</h1>
+                <h1 className="Card_title">Option Expiry Date</h1>
                 <h6 className="Card_content">
                   {isLoading && active ? (
                     <SkeletonTheme color="#333" highlightColor="#888">
@@ -118,6 +138,21 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                     </SkeletonTheme>
                   ) : (
                     "" + getContractExpiry
+                  )}
+                </h6>
+              </article>
+            </section>
+            <section>
+            <article className="Card_item">
+                <h1 className="Card_title">Bidding Ends in</h1>
+                <h6 className="Card_content">
+                  {isLoading && active ? (
+                    <SkeletonTheme color="#333" highlightColor="#888">
+                      x
+                      <Skeleton width={50} />
+                    </SkeletonTheme>
+                  ) : (
+                    <CountdownTimer date = {options.BidEnd} />
                   )}
                 </h6>
               </article>
