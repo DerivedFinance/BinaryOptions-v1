@@ -23,6 +23,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
   const [hasContractExpire, setHasContractExpire] = useState(false);
   const [getContractExpiry, setGetContractExpiry] = useState({});
   const [DVDBalanceError, setDVDBalanceError] = useState(false);
+  const [getAssetPrice, setGetAssetPrice] = useState({});
   const DVDBalance = useDVDBalance();
 
   useEffect(() => {
@@ -40,14 +41,21 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
           .catch((error) => {});
         setHasContractExpire(hasContractExpire);
 
+        //get bid expiry date
         const getContractExpiry = await ClaimContract.methods
           .getContractExpiry()
           .call({ from: account })
           .catch((error) => {});
         const contractExpiry = new Date(0);
         contractExpiry.setUTCSeconds(getContractExpiry);
-        // setGetContractExpiry(contractExpiry);
         setGetContractExpiry(isValidDate(contractExpiry) ? formatTxTimestamp(contractExpiry) : formatTxTimestamp(Date.now()));
+
+        //get current price
+        const currentPrice = await ClaimContract.methods
+          .getAssetPrice()
+          .call({ from: account })
+          .catch((error) => {});
+        setGetAssetPrice(currentPrice);
       };
       getOwner();
     }
@@ -80,6 +88,21 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                     </SkeletonTheme>
                   ) : (
                     "$" + price
+                  )}
+                </h6>
+              </article>
+            </section>
+            <section>
+              <article className="Card_item">
+                <h1 className="Card_title">Current Asset Price</h1>
+                <h6 className="Card_content">
+                  {isLoading && active ? (
+                    <SkeletonTheme color="#333" highlightColor="#888">
+                      x
+                      <Skeleton width={50} />
+                    </SkeletonTheme>
+                  ) : (
+                    "$" + getAssetPrice
                   )}
                 </h6>
               </article>

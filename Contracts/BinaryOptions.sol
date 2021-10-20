@@ -263,6 +263,10 @@ contract BinaryOptions is Ownable, Authorizable, Pausable, Biddable, Oracle {
     return currentPrice;
   }
 
+  function getAssetPrice() external whenNotPaused returns (uint256) {
+    return uint256(getPrice(aggregator));
+  }
+
   function getBidPeriodLimit() external view whenNotPaused returns (uint256) {
     return bidPeriodTime;
   }
