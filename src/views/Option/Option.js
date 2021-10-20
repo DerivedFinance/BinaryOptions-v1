@@ -217,7 +217,10 @@ const Option = () => {
               toasterMessage(error.message || SHORT_FAILED, { error: true });
             });
         })
-        .catch((error) => setIsOperation(false));
+        .catch((error) => {
+          setIsOperation(false);
+          toasterMessage(error.message || SHORT_FAILED, { error: true });
+        });
     } else {
       setOnpauseError(true);
     }

@@ -27,19 +27,11 @@ const NavWithDetails = ({ title, value, ...props }) => {
           <div className="user-address">{title}:</div>
           <div className="">
             {value.length > 5 && !mediaQuery.matches ? (
-              <OverlayTrigger
-                key={`bottom`}
-                placement={`bottom`}
-                overlay={renderTooltip(value)}
-              >
-                <div>
-                  {value.length > 5 ? truncateBalance(value.toString()) : value}
-                </div>
+              <OverlayTrigger key={`bottom`} placement={`bottom`} overlay={renderTooltip(value)}>
+                <div>{value.length > 5 ? truncateBalance(value.toString()) : value}</div>
               </OverlayTrigger>
             ) : (
-              <div>
-                {value.length > 5 ? truncateBalance(value.toString()) : value}
-              </div>
+              <div>{value.length > 5 ? truncateBalance(value.toString()) : value}</div>
             )}
           </div>
         </div>
@@ -55,12 +47,7 @@ const AppLayout = ({ children }) => {
   return (
     <Fragment>
       <div className="appLayout">
-        <Navbar
-          collapseOnSelect
-          expand="lg"
-          variant="dark"
-          className="nav-layout"
-        >
+        <Navbar collapseOnSelect expand="lg" variant="dark" className="nav-layout">
           <Link to="/">
             <img src={DerivedLogo} alt="logo" className="navLogo" />
           </Link>
@@ -68,23 +55,10 @@ const AppLayout = ({ children }) => {
           <Nav>
             {account ? (
               <Fragment>
-                <NavWithDetails title="BNB" value={ether} className="eth-nav" />{" "}
-                <NavWithDetails
-                  title="USDx"
-                  value={DVDBalance.toString()}
-                  className="eth-nav"
-                />
+                <NavWithDetails title="BNB" value={ether} className="eth-nav" /> <NavWithDetails title="USDx" value={DVDBalance.toString()} className="eth-nav" />
               </Fragment>
             ) : null}
-            {account ? (
-              <UserInfo
-                address={account}
-                ether={ether}
-                DVDBalance={DVDBalance}
-              />
-            ) : (
-              <MetamaskButton />
-            )}
+            {account ? <UserInfo address={account} ether={ether} DVDBalance={DVDBalance} /> : <MetamaskButton />}
           </Nav>
         </Navbar>
         <Sidebar />
