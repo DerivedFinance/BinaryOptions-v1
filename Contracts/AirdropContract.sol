@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract Airdrop is Ownable {
   ERC20 public TestToken;
 
-  uint256 testTokenLimit = 10000;
+  uint256 testTokenLimit = 10000 * 10**18;
 
   mapping(address => bool) private claimDetails;
 
