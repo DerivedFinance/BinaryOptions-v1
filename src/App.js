@@ -38,36 +38,16 @@ const App = () => {
       <HashRouter>
         <AppLayout>
           <Switch>
-            <Route
-              exact
-              path="/"
-              component={React.lazy(() =>
-                import("./views/Dashboard/Dashboard")
-              )}
-            />
+            <Route exact path="/" component={React.lazy(() => import("./views/Dashboard/Dashboard"))} />
 
-            <Route
-              exact
-              path="/options/:contractAddress"
-              component={React.lazy(() => import("./views/Option/Option"))}
-            />
+            <Route exact path="/options/:contractAddress" component={React.lazy(() => import("./views/Option/Option"))} />
 
-            <Route
-              exact
-              path="/add-option"
-              component={React.lazy(() =>
-                import("./views/AddOption/AddOption")
-              )}
-            />
+            <Route exact path="/add-option" component={React.lazy(() => import("./views/AddOption/AddOption"))} />
           </Switch>
           <TGEModal show={!!error}>
             <div className="mb-2">
               <div className="row mt-4 text-center ml-auto mr-auto wrong-network">
-                {error instanceof UnsupportedChainIdError ? (
-                  <h5>Please connect to the appropriate ERC20 network.</h5>
-                ) : (
-                  <h5>Error connecting. Try refreshing the page.</h5>
-                )}
+                {error instanceof UnsupportedChainIdError ? <h5>Please connect to the appropriate BSC network.</h5> : <h5>Error connecting. Try refreshing the page.</h5>}
               </div>
             </div>
           </TGEModal>

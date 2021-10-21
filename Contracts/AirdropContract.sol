@@ -6,26 +6,19 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract Airdrop is Ownable {
-  struct User {
-    uint256 amountLeft;
-    bool claimed;
-  }
-
   ERC20 public TestToken;
 
-  
+  uint256 testTokenLimit = 10000;
 
-  mapping(address => User) public UserDetails;
+  mapping(address => bool) private claimDetails;
 
-  constructor(address _token) public {
+  constructor(address _token) {
     TestToken = ERC20(_token);
   }
 
   function claimTokens() external {
-    require(UserDetails[msg.sender].claimed == false, "Tokens already Claimed");
-    uint256 _amount = UserDetails[msg.sender].amountLeft;
-    UserDetails[msg.sender] = User(0, true);
-    TestToken.transfer(msg.sender, _amount);
+    require(claimDetails[msg.sender] == false, "Tokens already Claimed");
+    TestToken.transfer(msg.sender, testTokenLimit);
   }
 
   function withdrawTokenBalance(address _tokenAddress) public onlyOwner {
