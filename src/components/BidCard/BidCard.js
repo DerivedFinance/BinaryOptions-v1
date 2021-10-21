@@ -16,7 +16,6 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Form } from "react-bootstrap";
 import CountdownTimer from "../OptionCard/countDownTimer";
 
-
 const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnded, claimed, onClaimClick, isLoading, isPaused, onPauseError }) => {
   const { active, account } = useWeb3React();
   const ClaimContract = useOptionContract(contractAddress);
@@ -143,7 +142,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
               </article>
             </section>
             <section>
-            <article className="Card_item">
+              <article className="Card_item">
                 <h1 className="Card_title">Bidding Ends in</h1>
                 <h6 className="Card_content">
                   {isLoading && active ? (
@@ -152,7 +151,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                       <Skeleton width={50} />
                     </SkeletonTheme>
                   ) : (
-                    <CountdownTimer date = {options.BidEnd} />
+                    <CountdownTimer date={options.BidEnd} />
                   )}
                 </h6>
               </article>

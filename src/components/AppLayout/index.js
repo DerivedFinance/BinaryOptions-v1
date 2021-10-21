@@ -55,7 +55,8 @@ const AppLayout = ({ children }) => {
           <Nav>
             {account ? (
               <Fragment>
-                <NavWithDetails title="BNB" value={ether} className="eth-nav" /> <NavWithDetails title="USDx" value={DVDBalance.toString()} className="eth-nav" />
+                <NavWithDetails title="BNB" value={ether} className="eth-nav" />
+                <NavWithDetails title="USDx" value={DVDBalance.toString()} className="eth-nav" />
               </Fragment>
             ) : null}
             {account ? <UserInfo address={account} ether={ether} DVDBalance={DVDBalance} /> : <MetamaskButton />}

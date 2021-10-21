@@ -7,7 +7,7 @@ import { Tooltip } from "ui-neumorphism";
 import Modal from "react-modal";
 import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 
-import { useOptionContract, useIsPause } from "../../hooks";
+import { useOptionContract, useIsPause, useAirdropContract } from "../../hooks";
 import { truncateAddress } from "../../utils/formatters";
 import { SUPPORTED_CHAINS } from "../../utils/connectors";
 import Spinner from "./../../components/Spinner/Spinner";
@@ -40,6 +40,7 @@ const customStyles = {
 const NOT_ADMIN_ERROR = "Only admin can call this function";
 const RESULT_ANNOUNCE = "Result Already Announced";
 const Option_Not_Expired = "Option Not Expired";
+const USDX_AIRDROP = "USDx Airdropped";
 
 const UserInfo = ({ address, ether, DVDBalance }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -55,8 +56,12 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
   const history = useHistory();
   const contractAddress = location.pathname.split("/")[2] || "";
 
+  const airdropContract = useAirdropContract("0x25A8b257Ae1DcAaC66109F7601C95a5FCFddA11A");
   const isPause = useIsPause(contractAddress);
   const optionContract = useOptionContract(contractAddress);
+
+  console.log(airdropContract);
+  console.log(optionContract);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
@@ -178,6 +183,28 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
       });
   };
 
+  const onClaimClick = async () => {
+    setIsOperation(true);
+    airdropContract.methods
+      .claimTokens()
+      .estimateGas({ from: account })
+      .then((gasLimit) => {
+        airdropContract.methods
+          .claimTokens()
+          .send({ from: account, gasLimit })
+          .then((result) => {
+            setIsOperation(false);
+            toasterMessage(USDX_AIRDROP);
+          })
+          .catch((error) => {
+            setIsOperation(false);
+          });
+      })
+      .catch((error) => {
+        setIsOperation(false);
+      });
+  };
+
   return (
     <>
       {isOperation && <Spinner />}
@@ -199,6 +226,11 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
             <div className="user-info-extended">
               <div className="user-info-wallet">
                 <div className="wallet-details">Wallet Details</div>
+              </div>
+              <div className="user-info-wallet">
+                <div className="wallet-button" onClick={() => onClaimClick()}>
+                  Get Testnet USDx
+                </div>
               </div>
               <div className="user-info-wallet-address">
                 <div>
