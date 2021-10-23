@@ -182,7 +182,7 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
 
   const onClaimClick = async () => {
     setIsOperation(true);
-    const airdrop = await AirdropContract.methods
+    AirdropContract.methods
       .claimTokens()
       .estimateGas({ from: account })
       .then((gasLimit) => {
@@ -195,14 +195,15 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
           })
           .catch((error) => {
             setIsOperation(false);
-            toasterMessage("Error in Testnet USDx Airdrop");
-            console.log(error.message);
+            if (error.message.includes("Tokens already Claimed"))
+              setError("Wallet " + account + " alread claimed USDx. Please import 0x62ca11380213f2a5a3d78edb633b0cb29a1f7294 to you wallet provider");
+            else toasterMessage("Error in USDx claim");
           });
       })
       .catch((error) => {
         setIsOperation(false);
-        toasterMessage("Error in Testnet USDx Airdrop");
-        console.log(error.message);
+        if (error.message.includes("Tokens already Claimed")) setError("Wallet " + account + " alread claimed USDx. Please import 0x62ca11380213f2a5a3d78edb633b0cb29a1f7294 to you wallet provider");
+        else toasterMessage("Error in USDx claim");
       });
   };
 
@@ -230,7 +231,7 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
               </div>
               <div className="user-info-wallet">
                 <div className="wallet-button" onClick={() => onClaimClick()}>
-                  Get Testnet USDx
+                  Get USDx
                 </div>
               </div>
               <div className="user-info-wallet-address">
