@@ -8,11 +8,7 @@ const useDerivedContract = () => {
   //   ABI,
   //   false
   // );
-  const cont = useContract(
-    "0x42eE8a75099876DBDcDE8e2aBE9FaD4f72994873",
-    ABI,
-    false
-  );
+  const cont = useContract("0x42eE8a75099876DBDcDE8e2aBE9FaD4f72994873", ABI, false);
   return cont;
 };
 

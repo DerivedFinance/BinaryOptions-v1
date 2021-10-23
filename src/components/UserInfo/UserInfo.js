@@ -56,12 +56,9 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
   const history = useHistory();
   const contractAddress = location.pathname.split("/")[2] || "";
 
-  const airdropContract = useAirdropContract("0x25A8b257Ae1DcAaC66109F7601C95a5FCFddA11A");
   const isPause = useIsPause(contractAddress);
   const optionContract = useOptionContract(contractAddress);
-
-  console.log(airdropContract);
-  console.log(optionContract);
+  const AirdropContract = useAirdropContract();
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
@@ -185,11 +182,11 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
 
   const onClaimClick = async () => {
     setIsOperation(true);
-    airdropContract.methods
+    const airdrop = await AirdropContract.methods
       .claimTokens()
       .estimateGas({ from: account })
       .then((gasLimit) => {
-        airdropContract.methods
+        AirdropContract.methods
           .claimTokens()
           .send({ from: account, gasLimit })
           .then((result) => {
@@ -198,10 +195,14 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
           })
           .catch((error) => {
             setIsOperation(false);
+            toasterMessage("Error in Testnet USDx Airdrop");
+            console.log(error.message);
           });
       })
       .catch((error) => {
         setIsOperation(false);
+        toasterMessage("Error in Testnet USDx Airdrop");
+        console.log(error.message);
       });
   };
 
