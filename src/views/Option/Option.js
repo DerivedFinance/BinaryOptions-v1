@@ -139,22 +139,22 @@ const Option = () => {
                     });
                     setClaimed(new Date());
                     setIsOperation(false);
-                    toasterMessage(LONG_SUCCESS);
+                    toasterMessage("$" + opt.currency + " " + LONG_SUCCESS);
                   });
                 })
                 .catch((error) => {
                   setIsOperation(false);
-                  toasterMessage(error.message || LONG_FAILED, { error: true });
+                  toasterMessage(error.message || "$" + opt.currency + " " + LONG_FAILED, { error: true });
                 });
             })
             .catch((error) => {
               setIsOperation(false);
-              toasterMessage(error.message || LONG_FAILED, { error: true });
+              toasterMessage(error.message || "$" + opt.currency + " " + LONG_FAILED, { error: true });
             });
         })
         .catch((error) => {
           setIsOperation(false);
-          toasterMessage(error.message || LONG_FAILED, { error: true });
+          toasterMessage(error.message || "$" + opt.currency + " " + LONG_FAILED, { error: true });
         });
     } else {
       setOnpauseError(true);
@@ -206,24 +206,24 @@ const Option = () => {
                     });
                     setClaimed(new Date());
                     setIsOperation(false);
-                    toasterMessage(SHORT_SUCCESS);
+                    toasterMessage("$" + opt.currency + " " + SHORT_SUCCESS);
                   });
                 })
                 .catch((error) => {
                   setIsOperation(false);
-                  toasterMessage(error.message || SHORT_FAILED, {
+                  toasterMessage(error.message || "$" + opt.currency + " " + SHORT_FAILED, {
                     error: true,
                   });
                 });
             })
             .catch((error) => {
               setIsOperation(false);
-              toasterMessage(error.message || SHORT_FAILED, { error: true });
+              toasterMessage(error.message || "$" + opt.currency + " " + SHORT_FAILED, { error: true });
             });
         })
         .catch((error) => {
           setIsOperation(false);
-          toasterMessage(error.message || SHORT_FAILED, { error: true });
+          toasterMessage(error.message || "$" + opt.currency + " " + SHORT_FAILED, { error: true });
         });
     } else {
       setOnpauseError(true);

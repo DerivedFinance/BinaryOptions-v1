@@ -135,6 +135,8 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                       x
                       <Skeleton width={50} />
                     </SkeletonTheme>
+                  ) : hasContractExpire ? (
+                    "Option Expired"
                   ) : (
                     "" + getContractExpiry
                   )}
@@ -150,6 +152,8 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
                       x
                       <Skeleton width={50} />
                     </SkeletonTheme>
+                  ) : hasContractExpire ? (
+                    "Bidding Ended"
                   ) : (
                     <CountdownTimer date={options.BidEnd} />
                   )}
@@ -164,7 +168,7 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
               </SkeletonTheme>
             ) : hasContractExpire || hasBidEnded || isPaused ? (
               isPaused ? (
-                <button className="Button_button bid-ended">Contract is on paused</button>
+                <button className="Button_button bid-ended">Contract is Paused</button>
               ) : isWinner ? (
                 <button className="Button_button bid-claim" onClick={() => onClaimClick()}>
                   Claim
