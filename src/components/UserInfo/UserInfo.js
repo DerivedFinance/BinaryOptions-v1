@@ -195,14 +195,13 @@ const UserInfo = ({ address, ether, DVDBalance }) => {
           })
           .catch((error) => {
             setIsOperation(false);
-            if (error.message.includes("Tokens already Claimed"))
-              setError("Wallet " + account + " alread claimed USDx. Please import 0x62ca11380213f2a5a3d78edb633b0cb29a1f7294 to you wallet provider");
+            if (error.message.includes("Tokens already Claimed")) setError("Wallet " + account + " alread claimed USDx. Please import 0x62ca11380213f2a5a3d78edb633b0cb29a1f7294 to your wallet");
             else toasterMessage("Error in USDx claim");
           });
       })
       .catch((error) => {
         setIsOperation(false);
-        if (error.message.includes("Tokens already Claimed")) setError("Wallet " + account + " alread claimed USDx. Please import 0x62ca11380213f2a5a3d78edb633b0cb29a1f7294 to you wallet provider");
+        if (error.message.includes("Tokens already Claimed")) setError("Wallet " + account + " alread claimed USDx. Please import 0x62ca11380213f2a5a3d78edb633b0cb29a1f7294 to your wallet");
         else toasterMessage("Error in USDx claim");
       });
   };

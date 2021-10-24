@@ -7,58 +7,73 @@
   margin-top: 3rem;
 }
 
-.bid-container{
+.trading-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  margin-top: 3rem;
+}
+
+.bid-container {
   margin-bottom: 5rem;
 }
 
-.scroller{
+.tradingview-widget-container {
+  margin-right: 2rem;
+  margin-bottom: 5rem;
+  width: 770px;
+  height: 340px;
+  background-color: transparent;
+}
+
+.scroller {
   color: white;
   overflow: hidden;
   max-width: 56vw;
   min-width: 629px;
   border-radius: 10px;
   margin: -2rem auto 2rem auto;
-  box-shadow:  4px 4px 6px rgba(0,0,0,0.8),
-    -4px -4px 6px #494949;
-} 
-
-@media only screen and (max-width: 1000px){
-  .option-container{
-    flex-direction: column;
-    width: auto;
-    align-items: stretch;
-  } 
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8), -4px -4px 6px #494949;
 }
-@media only screen and (max-width: 700px){
-  .option-container{
+
+@media only screen and (max-width: 1000px) {
+  .option-container {
     flex-direction: column;
     width: auto;
     align-items: stretch;
   }
-  .bid-container{
-    width:100vw;
+}
+@media only screen and (max-width: 700px) {
+  .option-container {
+    flex-direction: column;
+    width: auto;
+    align-items: stretch;
+  }
+  .bid-container {
+    width: 100vw;
     margin-bottom: 5rem;
   }
-  .scroller{
+  .scroller {
     min-width: 90vw;
   }
-  .activity_search{
+  .activity_search {
     margin-right: 30px !important;
   }
 }
 
-.activity_search{
-  margin:auto 2px 50px auto;
+.activity_search {
+  margin: auto 2px 50px auto;
   background-color: transparent;
   color: white;
   border: none;
-  padding:5px 10px;
+  padding: 5px 10px;
   border-radius: 10px;
-  box-shadow:  2px 2px 3px rgba(0,0,0,0.8),
-  -2px -2px 3px #595959;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8), -2px -2px 3px #595959;
   outline: none;
 }
-.Option_images{
+.Option_images {
   width: 400px;
   font-size: larger;
   text-transform: uppercase;
@@ -67,12 +82,12 @@
   margin-bottom: 2rem;
   align-items: center;
 }
-.backbutton{
+.backbutton {
   float: left;
   align-items: flex-start;
 }
-@media (max-width: 760px){
+@media (max-width: 760px) {
   .Option_images {
-      width: 320px !important;
+    width: 320px !important;
   }
 }

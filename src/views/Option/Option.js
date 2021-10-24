@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router";
 
 import BidCard from "../../components/BidCard/BidCard";
 import BaseTable from "../../components/BaseTable/BaseTable";
+import TradingViewWidget, { Themes } from "react-tradingview-widget";
 import {
   // useDVDBalance,
   useDVDTokenContract,
@@ -23,6 +24,7 @@ import Spinner from "./../../components/Spinner/Spinner";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import toasterMessage from "../../utils/toasterMessage";
 import { LONG_FAILED, LONG_SUCCESS, SHORT_FAILED, SHORT_SUCCESS, CLAIM_FAILED, CLAIM_SUCCESS } from "../../constants";
+import { Table } from "react-bootstrap";
 
 const Option = () => {
   const [contractDetails, setContractDetails] = useState({
@@ -65,6 +67,8 @@ const Option = () => {
       setOptionContract(OptionContract);
     }
   }, [contractAddress, active, account]);
+
+  const TradingView = () => <TradingViewWidget symbol="BINANCE:CAKEUSDT" theme={Themes.DARK} locale="EN" autosize />;
 
   useEffect(() => {
     const getContractDetails = async () => {
@@ -297,43 +301,48 @@ const Option = () => {
     <>
       {isOperation && <Spinner />}
       <div className="option-container">
-        <div className="bid-container">
-          <section className="Option_images">
-            <button className="Button_button" onClick={onBack} style={{ padding: "5px", color: "white" }}>
-              <ArrowBack />
-            </button>
-            <div style={{ margin: "auto" }}>
-              {isLoading && !opt.currencyLogo ? (
-                <SkeletonTheme color="#202020" highlightColor="#444">
-                  <section>
-                    <Skeleton height={40} width={40} />
-                  </section>
-                </SkeletonTheme>
-              ) : (
-                <img width="40" height="40" src={opt?.currencyLogo || "https://gateway.pinata.cloud/ipfs/QmNRYGM4mgbFp83ff7KFXQrieFiNk9zuWTmD1CqiuDAPB8"} alt="" style={{ borderRadius: 20 }} />
-              )}
-              &nbsp;&nbsp;&nbsp;
-              {isLoading ? (
-                <SkeletonTheme color="#333" highlightColor="#888">
-                  <Skeleton width={50} />
-                </SkeletonTheme>
-              ) : (
-                opt?.currency
-              )}
-            </div>
-          </section>
-          <BidCard
-            isPaused={isPause}
-            contractAddress={contractAddress}
-            price={contractDetails.price}
-            onLongClick={onLongClick}
-            onShortClick={onShortClick}
-            hasBidEnded={contractDetails.hasBidEnded}
-            claimed={claimed}
-            onClaimClick={onClaimClick}
-            isLoading={isLoading}
-            onPauseError={onPauseError}
-          />
+        <section className="Option_images">
+          <button className="Button_button" onClick={onBack} style={{ padding: "5px", color: "white" }}>
+            <ArrowBack />
+          </button>
+          <div style={{ margin: "auto" }}>
+            {isLoading && !opt.currencyLogo ? (
+              <SkeletonTheme color="#202020" highlightColor="#444">
+                <section>
+                  <Skeleton height={40} width={40} />
+                </section>
+              </SkeletonTheme>
+            ) : (
+              <img width="40" height="40" src={opt?.currencyLogo || "https://gateway.pinata.cloud/ipfs/QmNRYGM4mgbFp83ff7KFXQrieFiNk9zuWTmD1CqiuDAPB8"} alt="" style={{ borderRadius: 20 }} />
+            )}
+            &nbsp;&nbsp;&nbsp;
+            {isLoading ? (
+              <SkeletonTheme color="#333" highlightColor="#888">
+                <Skeleton width={50} />
+              </SkeletonTheme>
+            ) : (
+              opt?.currency
+            )}
+          </div>
+        </section>
+        <div className="trading-container">
+          <div className="tradingview-widget-container">
+            <TradingView />
+          </div>
+          <div className="bid-container">
+            <BidCard
+              isPaused={isPause}
+              contractAddress={contractAddress}
+              price={contractDetails.price}
+              onLongClick={onLongClick}
+              onShortClick={onShortClick}
+              hasBidEnded={contractDetails.hasBidEnded}
+              claimed={claimed}
+              onClaimClick={onClaimClick}
+              isLoading={isLoading}
+              onPauseError={onPauseError}
+            />
+          </div>
         </div>
 
         <input type="text" className="activity_search" placeholder="Search by type or Position" onChange={textchange} />
