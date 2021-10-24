@@ -24,7 +24,6 @@ import Spinner from "./../../components/Spinner/Spinner";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import toasterMessage from "../../utils/toasterMessage";
 import { LONG_FAILED, LONG_SUCCESS, SHORT_FAILED, SHORT_SUCCESS, CLAIM_FAILED, CLAIM_SUCCESS } from "../../constants";
-import { Table } from "react-bootstrap";
 
 const Option = () => {
   const [contractDetails, setContractDetails] = useState({
@@ -68,7 +67,8 @@ const Option = () => {
     }
   }, [contractAddress, active, account]);
 
-  const TradingView = () => <TradingViewWidget symbol="BINANCE:CAKEUSDT" theme={Themes.DARK} locale="EN" autosize />;
+  const tradingViewSymbol = "BINANCE:" + opt.currency + "USDT";
+  const TradingView = () => <TradingViewWidget symbol={tradingViewSymbol} theme={Themes.DARK} locale="EN" autosize />;
 
   useEffect(() => {
     const getContractDetails = async () => {
@@ -315,7 +315,7 @@ const Option = () => {
             ) : (
               <img width="40" height="40" src={opt?.currencyLogo || "https://gateway.pinata.cloud/ipfs/QmNRYGM4mgbFp83ff7KFXQrieFiNk9zuWTmD1CqiuDAPB8"} alt="" style={{ borderRadius: 20 }} />
             )}
-            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {isLoading ? (
               <SkeletonTheme color="#333" highlightColor="#888">
                 <Skeleton width={50} />
