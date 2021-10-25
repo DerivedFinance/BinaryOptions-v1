@@ -6,6 +6,7 @@ import { useWeb3React } from "@web3-react/core";
 import { useOptionContract } from "../../hooks";
 import CountdownTimer from "../OptionCard/countDownTimer";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
 const Card = ({ id, onCardClick, currency, currencyLogo, onEnded = undefined, type }) => {
   const { account } = useWeb3React();
   const [options, setOptions] = useState({
@@ -19,6 +20,7 @@ const Card = ({ id, onCardClick, currency, currencyLogo, onEnded = undefined, ty
   const [isLoading, setIsLoading] = useState(false);
   const [contractExpiry, setContractExpiry] = useState(false);
   const OptionContract = useOptionContract(id);
+  const [getAssetPrice, setGetAssetPrice] = useState({});
 
   useEffect(() => {
     const getLongs = async () => {
@@ -35,6 +37,12 @@ const Card = ({ id, onCardClick, currency, currencyLogo, onEnded = undefined, ty
           .call({ from: account })
           .catch((err) => {});
         setContractExpiry(hasContractExpire);
+
+        const currentPrice = await OptionContract.methods
+          .getAssetPrice()
+          .call({ from: account })
+          .catch((error) => {});
+        setGetAssetPrice(currentPrice);
 
         const contractExpiry = new Date(0);
         contractExpiry.setUTCSeconds(epochContractExpiry); //Covert Epoch date to standard UTC Date
@@ -116,6 +124,18 @@ const Card = ({ id, onCardClick, currency, currencyLogo, onEnded = undefined, ty
                         </SkeletonTheme>
                       ) : (
                         options.strikePrice + "$"
+                      )}
+                    </h6>
+                  </article>
+                  <article className="StakeItemCard_item">
+                    <h1 className="StakeItemCard_title">Current Asset Price</h1>
+                    <h6 className="StakeItemCard_content">
+                      {isLoading ? (
+                        <SkeletonTheme color="#333" highlightColor="#888">
+                          <Skeleton width={100} />
+                        </SkeletonTheme>
+                      ) : (
+                        getAssetPrice + "$"
                       )}
                     </h6>
                   </article>

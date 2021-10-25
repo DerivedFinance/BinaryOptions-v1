@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 import { useHistory, useParams } from "react-router";
-
 import BidCard from "../../components/BidCard/BidCard";
 import BaseTable from "../../components/BaseTable/BaseTable";
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
@@ -13,11 +12,9 @@ import {
   useOptionContract,
   usePinataOptions,
 } from "../../hooks";
-
 import ABI from "../../contracts/derived.json";
 import "./Option.css";
 import ArrowBack from "@material-ui/icons/ArrowBack";
-
 import usePinataActivities from "../../hooks/usePinataActivities";
 import { pinActivityData } from "../../utils/storeData";
 import Spinner from "./../../components/Spinner/Spinner";
