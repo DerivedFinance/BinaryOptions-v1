@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Card.css";
-import { formatTxTimestamp, isValidDate } from "../../utils/formatters";
+import { formatTxTimestamp, isValidDate, truncateAddress } from "../../utils/formatters";
 
 import { useWeb3React } from "@web3-react/core";
 import { useOptionContract } from "../../hooks";
@@ -91,6 +91,18 @@ const Card = ({ id, onCardClick, currency, currencyLogo, onEnded = undefined, ty
                   </h1>
                 </header>
                 <section>
+                  <article className="StakeItemCard_item">
+                    <h1 className="StakeItemCard_title">Binary Option ID</h1>
+                    <h6 className="StakeItemCard_content">
+                      {isLoading ? (
+                        <SkeletonTheme color="#333" highlightColor="#888">
+                          <Skeleton width={120} />
+                        </SkeletonTheme>
+                      ) : (
+                        truncateAddress(id)
+                      )}
+                    </h6>
+                  </article>
                   <article className="StakeItemCard_item">
                     <h1 className="StakeItemCard_title">Time Remaining</h1>
                     <h6 className="StakeItemCard_content">

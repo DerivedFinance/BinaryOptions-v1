@@ -13,9 +13,7 @@ const cardLayoutSwitchLimit = 6; //CArd Limit after which Carsoule Switch to Tab
 const Dashboard = () => {
   const [showTable, setShowTable] = useState(false);
   const history = useHistory();
-  const { optionList, isLoading } = usePinataOptions(
-    process.env.REACT_APP_ADMIN_WALLET
-  );
+  const { optionList, isLoading } = usePinataOptions(process.env.REACT_APP_ADMIN_WALLET);
   const DVDBalance = useDVDBalance();
 
   const onCardClick = (id) => {
@@ -33,27 +31,13 @@ const Dashboard = () => {
         {isLoading ? (
           <Spinner />
         ) : showTable ? (
-          <CardTableLayout
-          cardList={optionList}
-          onCardClick={onCardClick}
-          />
+          <CardTableLayout cardList={optionList} onCardClick={onCardClick} />
         ) : (
           <div className="carousel-container">
-            {optionList?.map(
-              ({ contract, expiry, currency, currencyLogo, id }, idx) => {
-                return (
-                  <Card
-                    id={contract}
-                    onCardClick={onCardClick}
-                    currency={currency}
-                    currencyLogo={currencyLogo}
-                    expiry={Number(expiry)}
-                    key={idx}
-                    type={"carouselformat"}
-                  />
-                );
-              }
-            )}
+            {optionList?.map(({ contract, expiry, currency, currencyLogo, id }, idx) => {
+              console.log(currency + " " + expiry + " " + id);
+              return <Card id={contract} onCardClick={onCardClick} currency={currency} currencyLogo={currencyLogo} expiry={Number(expiry)} key={idx} type={"carouselformat"} />;
+            })}
           </div>
         )}
       </div>
