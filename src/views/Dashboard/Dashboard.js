@@ -34,8 +34,10 @@ const Dashboard = () => {
           <CardTableLayout cardList={optionList} onCardClick={onCardClick} />
         ) : (
           <div className="carousel-container">
+            {/* {console.log(optionList?.map(() => {}))} */}
             {optionList?.map(({ contract, expiry, currency, currencyLogo, id }, idx) => {
-              console.log(currency + " " + expiry + " " + id);
+              console.log(currency + " " + expiry + " " + id + " " + idx);
+              const expiryDate = expiry;
               return <Card id={contract} onCardClick={onCardClick} currency={currency} currencyLogo={currencyLogo} expiry={Number(expiry)} key={idx} type={"carouselformat"} />;
             })}
           </div>

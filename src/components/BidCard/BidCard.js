@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 
-import { formatTxTimestamp, isValidDate } from "../../utils/formatters";
+import { formatTxTimestamp, isValidDate, truncateAddress } from "../../utils/formatters";
 
 import MetamaskButton from "../MetamaskButton/MetamaskButton";
 
@@ -95,6 +95,21 @@ const BidCard = ({ onLongClick, onShortClick, contractAddress, price, hasBidEnde
           <div className="Bid_Card_main">
             <section className="BidTokenPair_images">
               <p style={{ fontSize: 20, color: "#86c440" }}>Pick a side to place a bid</p>
+            </section>
+            <section>
+              <article className="Card_item">
+                <h1 className="Card_title">Binary Option ID</h1>
+                <h6 className="Card_content">
+                  {isLoading && active ? (
+                    <SkeletonTheme color="#333" highlightColor="#888">
+                      x
+                      <Skeleton width={50} />
+                    </SkeletonTheme>
+                  ) : (
+                    "" + truncateAddress(contractAddress)
+                  )}
+                </h6>
+              </article>
             </section>
             <section>
               <article className="Card_item">
